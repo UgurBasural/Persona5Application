@@ -1,0 +1,24 @@
+﻿@model Persona5APP.ViewModels.PersonaArcanaViewModel
+@{
+    ViewData["Update"] = "Update";
+}
+
+<div class="text-center">
+    <h1>Modify the Persona</h1>
+    <div class="form-group">
+        <form asp-action="Update" asp-controller="Home">
+            <div class="form-group">
+                <input type="hidden" asp-for="Persona.PersonaID"/>
+                <label asp-for="Persona.PersonaName"></label><br />
+                <input asp-for="Persona.PersonaName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Persona.arcana"></label><br />
+                @Html.DropDownListFor(m => m.Persona.arcanaID, new SelectList(Model.Arcanas, "arcanaID", "Arcananame"), new { @class = "form-control" })
+             </div>
+                <button type="submit" class="btn btn-dark">Update the Persona</button>
+        </form>
+    </div>
+</div>
+
+

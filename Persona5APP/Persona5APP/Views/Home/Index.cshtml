@@ -1,0 +1,64 @@
+﻿@model PagedList.Core.IPagedList<Persona5APP.Models.Persona>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div>
+        <a class="btn btn-primary btn-lg btn-block" asp-action="Create" asp-controller="Home">
+            Add a new Persona
+        </a><br />
+    </div>
+    <div>
+        <pager list="@Model" asp-controller="Home" asp-action="Index" />
+    </div>
+<div class="text-center row">
+    
+    @foreach (var persona in Model)
+    {
+        <div class="col-sm-3 d-flex align-items-stretch d-block" id="personas">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@persona.PersonaName</h5>
+                    <p class="card-text">@persona.PersonaName belongs to the @persona.arcana.Arcananame arcana.</p>
+                    <a asp-action="Update" asp-route-id="@persona.PersonaID" class="btn btn-info">Edit</a>
+                    <a data-id="@persona.PersonaID" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.card-body').on('click', '.btn-danger', function () {
+            var btn = $(this);
+            bootbox.confirm({
+                title:"Banishment of the",
+                message: "Are you sure about deleting this Persona?",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm'
+                }
+            },
+                callback:function(result) {
+                    if (result) {
+                        var id = btn.data("id");
+                        $.ajax({
+                            type: "GET",
+                            url: "/Home/Delete/" + id,
+                            success: function () {
+                                bootbox.alert("Persona has gone now!");
+                            }
+                        });
+                    }
+                    else {
+                        bootbox.alert("You couldn't eradicate it!");
+                    }
+                }
+            });
+        });
+        });
+</script>

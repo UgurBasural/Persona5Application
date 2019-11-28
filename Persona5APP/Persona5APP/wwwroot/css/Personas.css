@@ -1,0 +1,8 @@
+﻿.container .text-center .col-sm-3{
+    padding-top:25px;
+    padding-bottom:20px;
+}
+#personas > div > div > a.btn.btn-danger{
+    color:white;
+    cursor:pointer;
+}

@@ -1,0 +1,19 @@
+﻿@model Persona5APP.ViewModels.PersonaArcanaViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="text-center">
+    <h1>Create a new Persona</h1>
+    <div class="form-group">
+        <form method="post" asp-action="Create" asp-controller="Home">
+            <label asp-for="Persona.PersonaName"></label><br />
+            <input asp-for="Persona.PersonaName" class="form-control" />
+            <label asp-for="Persona.arcana"></label><br />
+            @Html.DropDownListFor(m => m.Persona.arcanaID, new SelectList(Model.Arcanas,"arcanaID","Arcananame"), new{ @class="form-control"})
+            <button type="submit" class="btn btn-dark" asp-action="Create">Add the Persona</button>
+        </form>
+    </div>
+</div>
+
+

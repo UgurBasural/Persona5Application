@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "bootbox.js@5.3.2",
+      "destination": "wwwroot/lib/bootbox.js/"
+    }
+  ,
+{
+  "library": "font-awesome@5.11.2",
+  "destination": "wwwroot/lib/font-awesome/"
+}
+]
+}
