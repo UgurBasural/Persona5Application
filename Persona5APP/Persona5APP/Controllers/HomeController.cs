@@ -18,11 +18,20 @@ namespace Persona5APP.Controllers
             db = context;
         }
 
-        public IActionResult Index(int page=1, int pageSize=4)
+        public IActionResult Index(int page = 1, int pagesize = 4)
         {
-            var personalar = db.Personas.Include(c => c.arcana);
-            PagedList<Persona> personas = new PagedList<Persona>(personalar, page, pageSize);
+            var Pagepersonas = db.Personas.Include(c => c.arcana);
+            PagedList<Persona> personas = new PagedList<Persona>(Pagepersonas, page, pagesize);     
             return View(personas);
+        }
+
+        public IActionResult Search(int page = 1, int pagesize = 4)
+        {
+            var search = Request.Query["search"].ToString();
+                var searchedpersonas = db.Personas.Include(c => c.arcana).Where(c => c.PersonaName.Contains(search));
+                PagedList<Persona> personas = new PagedList<Persona>(searchedpersonas, page, pagesize);
+                ViewBag.search = search;
+                return View("Index", personas);
         }
 
         public IActionResult Create()
